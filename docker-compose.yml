@@ -29,11 +29,3 @@ services:
     volumes:
       - ./wordpress:/var/www/html:delegated
 
-  # commented that for debugging purposes    
-  #  wp: 
-    # build:
-# context: .
-#dockerfile: php.dockerfile
-    #   volumes:
-      # - ./wordpress:/var/www/html:delegated
-    # entrypoint: ["wp", "--allow-root"]

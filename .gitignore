@@ -1,2 +1,3 @@
 mysql/
-mkcert/
+nginx/certs/
+wordpress/

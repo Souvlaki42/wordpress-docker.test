@@ -37,7 +37,8 @@ I was inspired by this YouTube video for the most part: https://www.youtube.com/
 
 > [!TIP]
 > Everywhere you see `wordpress-docker.test` you can replace it with your own local domain. Just make sure you update the `server_name`
-> , the `ssl_certificate` and the `ssl_certificate_key` in the `nginx/default.conf` file.
+> , the `ssl_certificate` and the `ssl_certificate_key` in the `nginx/default.conf` file accordingly. Also, the `etc/hosts` file (or the equivalent on your OS)
+> needs to be updated with your local domain.
 
 7. Create a `mysql` folder inside your project root.
 8. After that you can run `docker-compose up -d --build` to start the containers and `docker-compose down` to stop them.

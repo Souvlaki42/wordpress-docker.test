@@ -42,6 +42,8 @@ I was inspired by this YouTube video for the most part: https://www.youtube.com/
 
 7. Create a `mysql` folder inside your project root.
 8. After that you can run `docker-compose up -d --build` to start the containers and `docker-compose down` to stop them.
+9. You can now access your WordPress site at `https://wordpress-docker.test`.
+10. You can also access the wp-cli directly using a command like `docker-compose run --rm wp user list`.
 
 > [!NOTE]
 > If you find any issues with the repository, please open an issue. Also, if you like this repository and want to support me, you can do so by giving me a star on GitHub.

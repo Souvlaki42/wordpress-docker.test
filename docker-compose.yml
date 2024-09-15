@@ -1,5 +1,9 @@
+networks:
+  wordpress:
+
 services:
-  nginx:
+  site:
+    container_name: nginx
     build:
       context: .
       dockerfile: nginx.dockerfile
@@ -11,22 +15,39 @@ services:
       - 443:443
     volumes:
       - ./wordpress:/var/www/html
+    networks:
+      - wordpress
+
   mysql:
     image: mysql:latest
+    container_name: mysql
+    restart: always
+    ports:
+      - 3306:3306
     environment:
       MYSQL_DATABASE: wp
       MYSQL_USER: wp
       MYSQL_PASSWORD: secret
       MYSQL_ROOT_PASSWORD: secret
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
     volumes:
       - ./mysql:/var/lib/mysql
+    networks:
+      - wordpress
+
   php:
+    container_name: php
     build:
       context: .
       dockerfile: php.dockerfile
     volumes:
       - ./wordpress:/var/www/html
+    networks:
+      - wordpress
+
   wp:
+    container_name: wp
     build:
       context: .
       dockerfile: php.dockerfile

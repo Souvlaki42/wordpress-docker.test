@@ -5,8 +5,8 @@ networks:
 
 services:
   db:
-    image: docker.io/mysql:latest
-    container_name: wp-mysql
+    image: docker.io/mariadb:12.3-noble
+    container_name: wp-db
     restart: always
     ports:
       - 3306:3306
@@ -14,11 +14,9 @@ services:
       MYSQL_DATABASE: wp
       MYSQL_USER: wp
       MYSQL_PASSWORD: secret
-      MYSQL_ROOT_PASSWORD: secret
-      SERVICE_TAGS: dev
-      SERVICE_NAME: mysql
+      MYSQL_RANDOM_ROOT_PASSWORD: "1"
     volumes:
-      - ./mysql:/var/lib/mysql
+      - ./mariadb:/var/lib/mysql
     networks:
       - proxy
       - wordpress

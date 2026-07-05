@@ -7,9 +7,7 @@ services:
   db:
     image: docker.io/mariadb:12.3-noble
     container_name: wp-db
-    restart: always
-    ports:
-      - 3306:3306
+    restart: unless-stopped
     environment:
       MYSQL_DATABASE: wp
       MYSQL_USER: wp
@@ -21,18 +19,17 @@ services:
       - proxy
       - wordpress
 
-  php:
-    container_name: wp-php
-    userns_mode: keep-id
-    user: wp
-    group_add:
-      - wp
-    build:
-      context: .
-      dockerfile: php.dockerfile
+  site:
+    image: docker.io/wordpress:php8.4-fpm-alpine
+    container_name: wp-site
+    restart: unless-stopped
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wp
+      WORDPRESS_DB_PASSWORD: secret
+      WORDPRESS_DB_NAME: wp
     volumes:
-      - ./site:/srv/wp
-      - ./php/www.conf:/usr/local/etc/php-fpm.d/www.conf
+      - ./site:/var/www/html
     networks:
       - proxy
       - wordpress
